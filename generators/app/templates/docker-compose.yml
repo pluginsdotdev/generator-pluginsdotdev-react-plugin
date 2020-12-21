@@ -1,0 +1,22 @@
+version: '2'
+services:
+  npm:
+    build:
+      context: .
+    image: plugin:1.0.0
+    working_dir: "/app"
+    user: node
+    volumes:
+     - ".:/app"
+    entrypoint: ["npm"]
+  storybook:
+    build:
+      context: .
+    image: plugin:1.0.0
+    working_dir: "/app"
+    user: node
+    ports:
+      - 9090:9090
+    volumes:
+      - ".:/app"
+    entrypoint: ["npm", "run", "storybook"]

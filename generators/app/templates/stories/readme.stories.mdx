@@ -1,0 +1,32 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Welcome/Readme" />
+
+# Welcome to Your Plugin
+
+Congratulations on becoming a [plugins.dev](https://plugins.dev) plugin author!
+This repository is *yours*--a clean sandbox in which to craft the perfect plugin.
+
+# Quick start
+
+ - You already took the first step: you ran `npm run storybook` (or `docker-compose up storybook` if using a docker dev flow)
+ - Any components the host will expose to your plugin are documented in the Host Components section of this storybook.
+ - Check out the stories in the Plugin States section of this storybook. They are renderings of your plugin (from src/plugin.ts) with some interesting property sets provided by the host (available in the fixtures directory).
+ - Modify the code in src/plugin.ts to build your plugin. You can add npm modules and do just about anything you need in your plugin. (See [plugin guidelines](#plugin-guidelines), below, for all the details)
+ - `npm test` (or `docker-compose run --rm npm test`) to run tests. By default, tests just check that the plugin does not crash for any host-specified interesting property sets (available in the fixtures directory).
+ - Modify plugin.yml to update your plugin's name, description, price, selected screenshots, privacy policy, whitelisted domains, etc.
+ - `git push origin master` to create a new version of your plugin and submit it for approval for inclusion in the host app store.
+
+# Plugin guidelines
+
+You can write your plugin however you'd like so long as you adhere to the following interface:
+ - `npm install && npm run build` must produce a dist/plugin.js file of es5 javascript and must place any referenced static assets in dist/assets. These commands should not connect to any sites other than standard package repositories (e.g. npmjs.com, maven.org, clojars.org, etc).
+ - dist/plugin.js should declare a single window variable, `window.pluginFactory`.
+ - `window.pluginFactory` must be a function that returns a component and conforms to the PluginFactory type of @pluginsdotdev/react-plugin (`(pluginConfig) => Component`).
+ - All domains your code connects to must be whitelisted in plugin.yml. In production, running on the host, your code will fail to connect to any domain not in this whitelist.
+ - `npm test` must exit with code 0
+
+Current plugin limitations:
+ - Canvas elements are not yet supported
+ - External CSS is not yet supported. Please use inline element styles.
+ - DOM modifications made outside of React rendering will not be visible when running in the host.
