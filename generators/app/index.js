@@ -113,7 +113,8 @@ module.exports = class extends Generator {
       'src/plugin.tsx',
       'fixtures/index.ts',
       'stories/plugin.stories.tsx',
-      'stories/readme.stories.mdx'
+      'stories/readme.stories.mdx',
+      'test/fixtures.test.tsx'
     ];
 
     staticFiles.forEach(f =>
