@@ -1,5 +1,5 @@
-# generator-pluginsdotdev-react-plugin [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
-> plugins.dev react plugin generator
+# generator-pluginsdotdev-react-plugin [![NPM version][npm-image]][npm-url]
+> [plugins.dev](https://plugins.dev) react plugin generator
 
 ## Installation
 
