@@ -51,12 +51,21 @@ module.exports = class extends Generator {
   constructor(args, opts) {
     super(args, opts);
 
-    neededData.forEach(({ name, message }) => {
-      this.option(name, {
-        desc: message,
-        type: String
+    const cwdOpt = {
+      type: "input",
+      name: "cwd",
+      message: "Working directory to use as a base for project creation",
+      default: "."
+    };
+
+    neededData
+      .concat([cwdOpt])
+      .forEach(({ name, message }) => {
+        this.option(name, {
+          desc: message,
+          type: String
+        });
       });
-    });
   }
 
   prompting() {
@@ -80,8 +89,8 @@ module.exports = class extends Generator {
     const hostFixturesDir = path.resolve(this.props.hostFixturesDir);
     const hostFixturesDirGlob = path.join(hostFixturesDir, "*");
 
-    nfs.mkdirSync(this.props.name);
-    this.destinationRoot(this.destinationPath(this.props.name));
+    const projectDir = path.join(this.props.cwd, this.props.name);
+    this.destinationRoot(projectDir);
 
     // Do this first, we want to overwrite if there's anything to overwrite
     this.fs.copy(hostFixturesDirGlob, this.destinationPath("fixtures"));
