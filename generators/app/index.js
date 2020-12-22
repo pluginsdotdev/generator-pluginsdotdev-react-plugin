@@ -115,7 +115,6 @@ module.exports = class extends Generator {
     );
 
     const staticFiles = [
-      'Dockerfile',
       '_gitignore',
       'docker-compose.yml',
       'jest.config.js',

@@ -1,18 +1,14 @@
 version: '2'
 services:
   npm:
-    build:
-      context: .
-    image: plugin:1.0.0
+    image: node:15.4.0-alpine3.12
     working_dir: "/app"
     user: node
     volumes:
      - ".:/app"
     entrypoint: ["npm"]
   storybook:
-    build:
-      context: .
-    image: plugin:1.0.0
+    image: node:15.4.0-alpine3.12
     working_dir: "/app"
     user: node
     ports:
