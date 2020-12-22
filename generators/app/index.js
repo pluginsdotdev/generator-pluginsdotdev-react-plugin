@@ -140,7 +140,7 @@ module.exports = class extends Generator {
 
   install() {
     if ( !this.props.skipInstall ) {
-      this.installDependencies();
+      this.installDependencies({ npm: true, bower: false });
     }
   }
 };
