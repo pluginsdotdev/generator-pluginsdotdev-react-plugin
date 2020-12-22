@@ -24,6 +24,16 @@ module.exports = class extends Generator {
       },
       {
         type: 'input',
+        name: 'hostName',
+        message: 'Host name:'
+      },
+      {
+        type: 'input',
+        name: 'pluginPoint',
+        message: 'Plugin point:'
+      },
+      {
+        type: 'input',
         name: 'gitUrl',
         message: 'Git url:'
       },
@@ -75,7 +85,17 @@ module.exports = class extends Generator {
       }
     });
 
-    const ctx = Object.assign({}, this.props, { fixtures: fixtureData });
+    const urlSafeName = x => x; // TODO
+    const ctx = Object.assign(
+      {},
+      this.props,
+      {
+        fixtures: fixtureData,
+        pluginUrl: `https://plugins.dev/h/${urlSafeName(this.props.hostName)}/${urlSafeName(this.props.pluginPoint)}/${urlSafeName(this.props.name)}`,
+        pluginPointUrl: `https://plugins.dev/h/${urlSafeName(this.props.hostName)}/${urlSafeName(this.props.pluginPoint)}`,
+        hostUrl: `https://plugins.dev/h/${urlSafeName(this.props.hostName)}`
+      }
+    );
 
     const staticFiles = [
       'Dockerfile',
@@ -83,15 +103,17 @@ module.exports = class extends Generator {
       'docker-compose.yml',
       'jest.config.js',
       'tsconfig.json',
-      '.storybook',
-      'stories/readme.stories.mdx'
+      '.storybook'
     ];
     const tplFiles = [
+      'README.md',
+      'plugin.yml',
       'package.json',
       'src/index.ts',
       'src/plugin.tsx',
       'fixtures/index.ts',
-      'stories/plugin.stories.tsx'
+      'stories/plugin.stories.tsx',
+      'stories/readme.stories.mdx'
     ];
 
     staticFiles.forEach(f =>

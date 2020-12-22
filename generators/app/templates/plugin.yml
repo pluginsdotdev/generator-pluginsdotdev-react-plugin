@@ -1,0 +1,17 @@
+name: "<%- name %>"
+description: >-
+  <%- description %>
+price:
+  # valid plan options include: free, one-time, monthly
+  plan: free
+  # for one-time or monthly plan options, include
+  # amount_in_cents: 100
+screenshot_fixtures:
+  <% fixtures.forEach(function(fixture) { %>- <%- fixture.fileWithoutExt %><% }) %>
+privacy_policy: |-
+  This plugin adheres to the default plugins.dev privacy policy.
+  User information necessary for the provision of the intended service may be collected and stored by the provider of the plugin and any vendors they contract with to provide the intended service.
+  All reasonable steps to secure your information will be taken by the plugin provider and its vendors.
+  Your information may not be transferred or sold to any third party not involved in the provision of the intended service.
+allowed_domains:
+  # - some.allowed.domain
