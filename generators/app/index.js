@@ -5,58 +5,75 @@ const Generator = require('yeoman-generator');
 const chalk = require('chalk');
 const yosay = require('yosay');
 
+const neededData = [
+  {
+    type: 'input',
+    name: 'name',
+    message: 'Plugin name'
+  },
+  {
+    type: 'input',
+    name: 'description',
+    message: 'Plugin description'
+  },
+  {
+    type: 'input',
+    name: 'hostName',
+    message: 'Host name'
+  },
+  {
+    type: 'input',
+    name: 'pluginPoint',
+    message: 'Plugin point'
+  },
+  {
+    type: 'input',
+    name: 'gitUrl',
+    message: 'Git url'
+  },
+  {
+    type: 'input',
+    name: 'authorEmail',
+    message: 'Author email'
+  },
+  {
+    type: 'input',
+    name: 'hostPluginPointPropsFile',
+    message: 'Typescript file exporting PluginProps type'
+  },
+  {
+    type: 'input',
+    name: 'hostFixturesDir',
+    message: 'Directory containing a file for each host fixture'
+  }
+];
+
 module.exports = class extends Generator {
+  constructor(args, opts) {
+    super(args, opts);
+
+    neededData.forEach(({type, name, message}) => {
+      this.option(
+        name,
+        {
+          desc: message,
+          type: String
+        }
+      );
+    });
+  }
+
   prompting() {
     this.log(
       yosay(`Your plugin awaits!`)
     );
 
-    const prompts = [
-      {
-        type: 'input',
-        name: 'name',
-        message: 'Plugin name:'
-      },
-      {
-        type: 'input',
-        name: 'description',
-        message: 'Plugin description:'
-      },
-      {
-        type: 'input',
-        name: 'hostName',
-        message: 'Host name:'
-      },
-      {
-        type: 'input',
-        name: 'pluginPoint',
-        message: 'Plugin point:'
-      },
-      {
-        type: 'input',
-        name: 'gitUrl',
-        message: 'Git url:'
-      },
-      {
-        type: 'input',
-        name: 'authorEmail',
-        message: 'Author email:'
-      },
-      {
-        type: 'input',
-        name: 'hostPluginPointPropsFile',
-        message: 'Typescript file exporting PluginProps type:'
-      },
-      {
-        type: 'input',
-        name: 'hostFixturesDir',
-        message: 'Directory containing a file for each host fixture:'
-      }
-    ];
+    const prompts = neededData
+      .filter(({name}) => !this.options[name])
+      .map(prompt => Object.assign({}, prompt, { message: prompt.message + ':' }));
 
     return this.prompt(prompts).then(props => {
-      // To access props later use this.props.someAnswer;
-      this.props = props;
+      this.props = Object.assign({}, this.options, props);
     });
   }
 
