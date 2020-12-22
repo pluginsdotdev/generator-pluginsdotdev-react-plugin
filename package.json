@@ -73,6 +73,6 @@
     "pretest": "eslint .",
     "test": "jest"
   },
-  "repository": "https://github.com/pluginsdotdev/react-plugin-generator.git",
+  "repository": "https://github.com/pluginsdotdev/generator-pluginsdotdev-react-plugin.git",
   "license": "MIT"
 }
