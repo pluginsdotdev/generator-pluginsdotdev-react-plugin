@@ -47,6 +47,10 @@ const neededData = [
   }
 ];
 
+const optTypeByInputType = {
+  checkbox: Boolean
+};
+
 module.exports = class extends Generator {
   constructor(args, opts) {
     super(args, opts);
@@ -58,18 +62,27 @@ module.exports = class extends Generator {
       default: "."
     };
 
+    const quietOpt = {
+      type: "checkbox",
+      name: "quiet",
+      message: "Suppress non-error output",
+      default: false
+    };
+
     neededData
-      .concat([cwdOpt])
-      .forEach(({ name, message }) => {
+      .concat([cwdOpt, quietOpt])
+      .forEach(({ name, type, message }) => {
         this.option(name, {
           desc: message,
-          type: String
+          type: optTypeByInputType[type] || String
         });
       });
   }
 
   prompting() {
-    this.log(yosay(`Your plugin awaits!`));
+    if ( !this.options.quiet ) {
+      this.log(yosay(`Your plugin awaits!`));
+    }
 
     const prompts = neededData
       .filter(({ name }) => !this.options[name])
@@ -78,7 +91,7 @@ module.exports = class extends Generator {
       );
 
     return this.prompt(prompts).then(props => {
-      this.props = Object.assign({}, this.options, props);
+      this.props = Object.assign({cwd: this.options.env.cwd}, this.options, props);
     });
   }
 
