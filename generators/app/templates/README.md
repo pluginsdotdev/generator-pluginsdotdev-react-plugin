@@ -24,12 +24,12 @@ Now that you've cloned this repo locally, set up your dependencies:
 
 (Docker development flow)
 ```
-docker-compose run --rm npm install
+docker-compose run --rm npm ci
 ```
 
 (Local development flow)
 ```
-npm install
+npm ci
 ```
 
 We recommend that you develop your plugin in [storybook](https://storybook.js.org/) for the best development experience.
@@ -117,7 +117,7 @@ You can check your build status and submit your build for approval by logging in
 # Plugin guidelines
 
 You can write your plugin however you'd like so long as you adhere to the following interface:
- - `npm install && npm run build` must produce a dist/index.js file of es5 javascript and must place any referenced static assets in dist/assets. These commands should not connect to any sites other than standard package repositories (e.g. npmjs.com, maven.org, clojars.org, etc).
+ - `npm ci && npm run build` must produce a dist/index.js file of es5 javascript and must place any referenced static assets in dist/assets. These commands should not connect to any sites other than standard package repositories (e.g. npmjs.com, maven.org, clojars.org, etc).
  - dist/index.js should declare a single window variable, `window.pluginFactory`.
  - `window.pluginFactory` must be a function that returns a component and conforms to the PluginFactory type of @pluginsdotdev/react-plugin (`(pluginConfig) => Component`).
  - All domains your code connects to must be allowed in plugin.yml. In production, running on the host, your code will fail to connect to any domain not in this allowed list.
