@@ -121,6 +121,7 @@ module.exports = class extends Generator {
 
     const urlSafeName = x => x; // TODO
     const ctx = Object.assign({}, this.props, {
+      version: "1.0.0",
       fixtures: fixtureData,
       pluginUrl: `https://plugins.dev/h/${urlSafeName(
         this.props.hostName
@@ -144,6 +145,7 @@ module.exports = class extends Generator {
       "README.md",
       "plugin.yml",
       "package.json",
+      "package-lock.json",
       "src/index.ts",
       "src/plugin.tsx",
       "fixtures/index.ts",
