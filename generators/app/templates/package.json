@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "keywords": ["pluginsdotdev", "plugin"],
   "scripts": {
-    "build": "tsc",
+    "build": "rollup --config rollup.config.ts",
     "test": "jest",
     "lint": "eslint . --ext .ts",
     "start": "npm run storybook",
@@ -20,6 +20,10 @@
   "license": "UNLICENSED",
   "devDependencies": {
     "@babel/core": "7.12.10",
+    "@rollup/plugin-commonjs": "17.0.0",
+    "@rollup/plugin-json": "4.1.0",
+    "@rollup/plugin-node-resolve": "11.0.1",
+    "@rollup/plugin-replace": "2.3.4",
     "@storybook/addon-actions": "6.1.11",
     "@storybook/addon-essentials": "6.1.11",
     "@storybook/addon-links": "6.1.11",
@@ -34,6 +38,9 @@
     "jest": "26.6.3",
     "prettier": "2.2.1",
     "react-test-renderer": "16.14.0",
+    "rollup": "2.35.1",
+    "rollup-plugin-sourcemaps": "0.6.3",
+    "rollup-plugin-typescript2": "0.29.0",
     "ts-jest": "26.4.4",
     "typescript": "4.1.3"
   },

@@ -139,6 +139,7 @@ module.exports = class extends Generator {
       "docker-compose.yml",
       "jest.config.js",
       "tsconfig.json",
+      "rollup.config.ts",
       ".storybook"
     ];
     const tplFiles = [
