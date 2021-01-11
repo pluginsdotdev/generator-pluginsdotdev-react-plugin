@@ -118,12 +118,9 @@ You can check your build status and submit your build for approval by logging in
 
 You can write your plugin however you'd like so long as you adhere to the following interface:
  - `npm ci && npm run build` must produce a dist/index.js file of es5 javascript and must place any referenced static assets in dist/assets. These commands should not connect to any sites other than standard package repositories (e.g. npmjs.com, maven.org, clojars.org, etc).
+   - It must also produce a dist/ancillary.js which exports a fixtures object with values of type `{ name: string, description: string, props: object }`.
+   - Every entry in `screenshot_fixtures` in plugin.yml must reference a fixture in this fixtures object.
  - dist/index.js should declare a single window variable, `window.pluginFactory`.
- - `window.pluginFactory` must be a function that returns a component and conforms to the PluginFactory type of @pluginsdotdev/react-plugin (`(pluginConfig) => Component`).
+   - `window.pluginFactory` must be a function that returns a component and conforms to the PluginFactory type of @pluginsdotdev/react-plugin (`(pluginConfig) => Component`).
  - All domains your code connects to must be allowed in plugin.yml. In production, running on the host, your code will fail to connect to any domain not in this allowed list.
  - `npm test` must exit with code 0
-
-Current plugin limitations:
- - Canvas elements are not yet supported
- - External CSS is not yet supported. Please use inline element styles.
- - DOM modifications made outside of React rendering will not be visible when running in the host.
