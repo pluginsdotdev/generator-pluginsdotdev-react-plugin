@@ -8,6 +8,6 @@
 
 import * as fixtures from './fixtures';
 
-export {
+(window as any)._pluginsdotdev_ancillary = {
   fixtures
 };
