@@ -140,7 +140,8 @@ module.exports = class extends Generator {
       "jest.config.js",
       "tsconfig.json",
       "rollup.config.ts",
-      ".storybook"
+      ".storybook",
+      "ancillary.ts"
     ];
     const tplFiles = [
       "README.md",
